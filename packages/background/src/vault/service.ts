@@ -206,6 +206,32 @@ export class VaultService {
   }
 
   @action
+  setAndMergeInsensitiveToVault(
+    type: string,
+    id: string,
+    insensitive: PlainRecord
+  ): void {
+    const vaults = this.vaultMap.get(type);
+    if (!vaults || vaults.length === 0) {
+      throw new Error(`There is no vault for ${id}`);
+    }
+
+    const i = vaults.findIndex((v) => v.id === id);
+    if (i < 0) {
+      throw new Error(`There is no vault for ${id}`);
+    }
+
+    const vault = vaults[i];
+    vaults[i] = {
+      ...vault,
+      insensitive: {
+        ...vault.insensitive,
+        ...insensitive,
+      },
+    };
+  }
+
+  @action
   removeVault(type: string, id: string): void {
     const vaults = this.vaultMap.get(type);
     if (!vaults || vaults.length === 0) {

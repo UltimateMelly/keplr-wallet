@@ -373,7 +373,9 @@ export class ChainsService {
     }
   }
 
-  @computed
+  @computed({
+    keepAlive: true,
+  })
   protected get chainInfoMap(): Map<string, ChainInfo> {
     const map: Map<string, ChainInfo> = new Map();
     for (const chainInfo of this.getChainInfos()) {
@@ -382,7 +384,9 @@ export class ChainsService {
     return map;
   }
 
-  @computed
+  @computed({
+    keepAlive: true,
+  })
   protected get chainInfoMapWithCoreTypes(): Map<
     string,
     ChainInfoWithCoreTypes
@@ -394,7 +398,9 @@ export class ChainsService {
     return map;
   }
 
-  @computed
+  @computed({
+    keepAlive: true,
+  })
   protected get updatedChainInfoMap(): Map<string, UpdatedChainInfo> {
     const map: Map<string, UpdatedChainInfo> = new Map();
     for (const chainInfo of this.updatedChainInfos) {
@@ -409,7 +415,9 @@ export class ChainsService {
     );
   }
 
-  @computed
+  @computed({
+    keepAlive: true,
+  })
   protected get repoChainInfoMap(): Map<string, ChainInfo> {
     const map: Map<string, ChainInfo> = new Map();
     for (const chainInfo of this.repoChainInfos) {
@@ -490,7 +498,9 @@ export class ChainsService {
     return this.endpointMap.get(ChainIdHelper.parse(chainId).identifier);
   }
 
-  @computed
+  @computed({
+    keepAlive: true,
+  })
   protected get endpointMap(): Map<
     string,
     {
